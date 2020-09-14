@@ -49,14 +49,31 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
-    children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
-    }]
+    children: [
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: 'Dashboard', icon: 'dashboard' }
+      }
+    ]
   },
 
+  {
+    path: '/private',
+    component: Layout,
+    name: 'Private',
+    redirect: '/private/index',
+    meta: { title: 'Private', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'index',
+        name: 'Private',
+        component: () => import('@/views/myprivate/private'),
+        meta: { title: 'Private', icon: 'dashboard' }
+      }
+    ]
+  },
   {
     path: '/example',
     component: Layout,
