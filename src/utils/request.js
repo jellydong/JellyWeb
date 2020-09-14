@@ -57,28 +57,32 @@ service.interceptors.response.use(
   error => {
     NProgress.done()
     console.log('err' + error) // for debug
-    switch (error.response.status) {
-      case 500:
-        Message.error({ showClose: true, message: error.response.data.message, duration: 5 * 1000 })
-        break
-      case 401:
-        Message.error({ showClose: true, message: '未授权', duration: 5 * 1000 })
-        break
-      case 403:
-        Message.error({ showClose: true, message: '无权限访问', duration: 5 * 1000 })
-        break
-      case 404:
-        Message.error({ showClose: true, message: '请求地址不存在', duration: 5 * 1000 })
-        break
-      case 400:
-        var errorMsg = error.response.data.error_description || error.response.data.message || error.response.data[0].description
-        if (errorMsg) {
-          Message.error({ showClose: true, message: errorMsg, duration: 5 * 1000 })
-        }
-        break
-      default:
-        Message.error({ showClose: true, message: '未知异常联系管理员', duration: 5 * 1000 })
-        break
+    if (error.response) {
+      switch (error.response.status) {
+        case 500:
+          Message.error({ showClose: true, message: error.response.data.message, duration: 5 * 1000 })
+          break
+        case 401:
+          Message.error({ showClose: true, message: '未授权', duration: 5 * 1000 })
+          break
+        case 403:
+          Message.error({ showClose: true, message: '无权限访问', duration: 5 * 1000 })
+          break
+        case 404:
+          Message.error({ showClose: true, message: '请求地址不存在', duration: 5 * 1000 })
+          break
+        case 400:
+          var errorMsg = error.response.data.error_description || error.response.data.message || error.response.data[0].description
+          if (errorMsg) {
+            Message.error({ showClose: true, message: errorMsg, duration: 5 * 1000 })
+          }
+          break
+        default:
+          Message.error({ showClose: true, message: '未知异常联系管理员', duration: 5 * 1000 })
+          break
+      }
+    } else {
+      Message.error({ showClose: true, message: error.message, duration: 5 * 1000 })
     }
     return Promise.reject(error)
   }
