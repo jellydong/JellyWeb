@@ -162,6 +162,9 @@ export default class SecurityService {
   signOut() {
     mgr.signoutRedirect().then(function(resp) {
       console.log('signed out', resp)
+      // reset visited views and cached views
+      // to fixed https://github.com/PanJiaChen/vue-element-admin/issues/2485
+      store.dispatch('tagsView/delAllViews', null, { root: true })
     }).catch(function(err) {
       console.log(err)
     })
