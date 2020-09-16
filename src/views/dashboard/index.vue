@@ -1,6 +1,9 @@
 <template>
   <div class="dashboard-container">
     <div class="dashboard-text">name: {{ name }}</div>
+    <el-button icon="el-icon-question" type="primary">
+      变大变小
+    </el-button>
   </div>
 </template>
 
