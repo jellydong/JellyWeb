@@ -22,7 +22,6 @@ export default {
   },
   methods: {
     click() {
-      debugger
       if (!screenfull.isEnabled) {
         this.$message({
           message: 'you browser can not work',
@@ -37,7 +36,6 @@ export default {
     },
     init() {
       if (screenfull.isEnabled) {
-        debugger
         screenfull.on('change', this.change)
       }
     },
