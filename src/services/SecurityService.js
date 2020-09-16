@@ -77,9 +77,7 @@ export default class SecurityService {
   renewToken() {
     const self = this
     return new Promise((resolve, reject) => {
-      debugger
       mgr.signinSilent().then(function(user) {
-        debugger
         if (user == null) {
           self.signIn(null)
         } else {

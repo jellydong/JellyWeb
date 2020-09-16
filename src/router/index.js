@@ -38,10 +38,9 @@ export const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
-
   {
     path: '/404',
-    component: () => import('@/views/404'),
+    component: () => import('@/views/error-page/404'),
     hidden: true
   },
 
@@ -55,22 +54,6 @@ export const constantRoutes = [
         name: 'Dashboard',
         component: () => import('@/views/dashboard/index'),
         meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-      }
-    ]
-  },
-
-  {
-    path: '/private',
-    component: Layout,
-    name: 'Private',
-    redirect: '/private/index',
-    meta: { title: 'Private', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'index',
-        name: 'Private',
-        component: () => import('@/views/myprivate/private'),
-        meta: { title: 'Private', icon: 'dashboard' }
       }
     ]
   },
@@ -184,7 +167,8 @@ export const constantRoutes = [
     component: CallBack,
     meta: {
       notRequiresAuth: true
-    }
+    },
+    hidden: true
   },
   {
     path: '/SilentCallback',
@@ -192,10 +176,9 @@ export const constantRoutes = [
     component: SilentCallback,
     meta: {
       notRequiresAuth: true
-    }
-  },
-  // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+    },
+    hidden: true
+  }
 ]
 /**
  * asyncRoutes
@@ -205,15 +188,24 @@ export const asyncRoutes = [
   {
     path: '/permission',
     component: Layout,
-    redirect: '/permission/page',
-    alwaysShow: true, // will always show the root menu
+    redirect: '/permission/index',
+    // alwaysShow: true, // will always show the root menu
     name: 'Permission',
     meta: {
       title: 'Permission',
-      icon: 'lock',
-      roles: ['admin', 'editor'] // you can set roles in root nav
+      icon: 'lock'
+      // roles: ['admin', 'editor'] // you can set roles in root nav
     },
     children: [
+      {
+        path: 'index',
+        component: () => import('@/views/myprivate/private'),
+        name: 'PagePermission',
+        meta: {
+          title: 'Page Permission'
+          // roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
     ]
   },
 
